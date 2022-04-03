@@ -1,23 +1,53 @@
 @extends('layouts.app')
 
+@section('title', 'Главная')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+<div class="row">
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+
+<div class="col-6">
+
+
+
+    <table class="table">
+        <thead class="thead-table">
+            <tr>
+                <th scope="col">Артикул</th>
+                <th scope="col">Название</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Атребут</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($Products as $product)
+            <tr>
+               
+                <td>{{ $product->article }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->status }}</td>
+                <td>{{ $product->data }}</td>
+            </tr> 
+            @endforeach
+        </tbody>
+    </table>
+</div>
+<div class="col-md-4">
+
+</div>
+<div class="col-2 ">
+    <button type="button" class="btn btn-primary">Добавить</button>
+</div>
+
+
+
+
+ </div>
+
+ <div class="row">
+    <div class="col-12">
+        {{ $Products->onEachSide(2)->links() }}
     </div>
 </div>
 @endsection

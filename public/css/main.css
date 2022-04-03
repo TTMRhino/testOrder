@@ -1,0 +1,75 @@
+html,
+body {
+    height: 100%;
+}
+
+.header-main {
+    height: 40px;
+    position: relative;
+    background-color: white;
+}
+
+.label-header {
+    width: 100px;
+    height: 100%;
+    border-bottom: 4px solid red;
+    color: red;
+    text-align: center;
+}
+
+.label-menu {
+    word-wrap: break-word;
+    font-size: 0.7rem;
+}
+
+.main {
+    background-color: #f7feff;
+}
+
+.article-bar {
+    color: white;
+    background-color: #424b5f;
+    /*height: 100%;*/
+}
+
+.warp-bar {
+    width: 200px;
+}
+
+.logo {
+    background-color: beige;
+    border-radius: 0% 0% 25px 0%;
+}
+
+.user {
+    color: grey;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.table {
+    color: #707b7c;
+    font-size: 0.8rem;
+    background-color: white;
+}
+
+.thead-table {
+    background-color: #f7feff;
+}
+
+.table td,
+.table th {
+    padding: .65rem;
+}
+
+.btn {
+    padding-left: 25%;
+    padding-right: 25%;
+    font-size: 0.7rem;
+}
+
+.btn-primary {
+    background-color: #16cae7;
+    border-color: #16cae7;
+    border-radius: 8px;
+}

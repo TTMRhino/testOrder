@@ -11,4 +11,9 @@ class Products extends Model
     use HasFactory, SoftDeletes;
 
     public $timestamps = false;  
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('status','available');
+    }
 }
