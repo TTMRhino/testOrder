@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="row">
+
                
                 @if(session('success'))
                     <div class="alert alert-success" role="alert">
@@ -31,14 +32,22 @@
                       <div class="card-body">
                         <!-- name -->
                         <div class="form-group">
-                          <label for="name">Name</label>
-                          <input type="text" value="{{ $product->name }}" class="form-control" name="name" id="name" placeholder="Enter name" required>
+                          <label for="name">Name</label>                          
+                          <input class="@error('name') is-invalid @enderror" type="text" value="{{ $product->name }}" class="form-control" name="name" id="name" placeholder="Enter name" required>
+                          
+                          @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                          @enderror
                         </div>
 
                         <!-- article -->
                         <div class="form-group">
                             <label for="article">Article</label>
-                            <input type="text" value="{{ $product->article }}" class="form-control" name="article" id="article" placeholder="Enter Article" required>
+                            <input class="@error('name') is-invalid @enderror" type="text" value="{{ $product->article }}" class="form-control" name="article" id="article" placeholder="Enter Article" required>
+
+                            @error('article')
+                              <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
         
                         
@@ -64,15 +73,17 @@
                           <div class="form-group">
 
                             <label for="{{$key}}">{{ $key }}</label>
-                            <input type="text" value="{{ $a_data[$key] }}" class="form-control" name="{{ $key }}" id="{{ $key }}" placeholder="Enter {{ $key }}" required>
+                            <input type="text" value="{{ $data }}" class="form-control" name="{{ $key }}" id="{{ $key }}" placeholder="Enter {{ $key }}" required>
                             
                           </div>
                           @endforeach
                         </div>
+
+                        <input type="hidden" value="{{ $product->id }}" name="id" id="id"/>
                  
                       <div class="btn-group btn-group" role="group" >
                         <button type="submit" class="btn btn-success">Save</button>
-                        <a  class="btn  btn-secondary" href="{{ URL::previous() }}" >Return</a>
+                        <a  class="btn  btn-secondary" href="{{ route('home') }}" >Return</a>
                       </div>
                       
                     </form>

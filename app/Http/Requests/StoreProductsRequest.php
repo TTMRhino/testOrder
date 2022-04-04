@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+
 
 class StoreProductsRequest extends FormRequest
 {
@@ -23,8 +26,16 @@ class StoreProductsRequest extends FormRequest
      */
     public function rules()
     {
+
+        
         return [
-            //
+            'name' => 'required|min:10|max:40',
+            'article' =>[
+                'required',
+                'regex:/^[a-z0-9]+$/i',
+                Rule::unique('products')->ignore($this->id),
+
+            ] 
         ];
     }
 }

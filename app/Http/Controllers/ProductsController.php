@@ -6,6 +6,8 @@ use App\Models\Products;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 
 class ProductsController extends Controller
@@ -74,12 +76,46 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $Product)
+    public function update(StoreProductsRequest $request, Products $Product)
     {
+        
+        /*$id = Products::where('id',$Product->id)->first();       
 
-        dd($request);
+       $validator =  Validator::make($request->all(), [
+            'name' => 'required|min:10|max:40',
+            'article' =>[
+                'required',
+                'regex:/^[a-z0-9]+$/i',
+                Rule::unique('products')->ignore($id->id),
+            ]
+        ]);
 
-        return redirect()->back()->withSuccess('Product edit successfully!');
+
+        if($validator->fails()){
+            return response($validator->messages(), 200);
+        } else {
+
+            Helpers::storeServer($request);
+
+            return response()->json([
+                'message'=> ['Server Stored']
+            ]);
+        }*/
+
+
+
+        $data = [
+            'Size' => $request->Size,
+            'Color' => $request->Color
+        ];
+
+        $Product->data = json_encode($data, JSON_PRETTY_PRINT);
+        $Product->name = $request->name;
+        $Product->status = $request->status;
+        $Product->article = $request->article;
+        $Product->save();       
+
+        return redirect()->back()->withSuccess('Product '. $Product->name .' edit successfully!');
     }
 
     /**
