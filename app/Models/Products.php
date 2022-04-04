@@ -12,6 +12,8 @@ class Products extends Model
 
     public $timestamps = false;  
 
+    
+
     public function scopeAvailable($query)
     {
         return $query->where('status','available');

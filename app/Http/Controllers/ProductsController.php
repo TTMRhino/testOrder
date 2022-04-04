@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Products;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
+use Illuminate\Http\Request;
+
 
 class ProductsController extends Controller
 {
@@ -56,9 +58,13 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Products $Product)
     {
-        //
+      
+        $a_data = json_decode( $Product->data);
+        
+       
+        return view('edit',['product' => $Product, 'a_data' => $a_data]);
     }
 
     /**
@@ -68,9 +74,12 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductsRequest $request, Products $products)
+    public function update(Request $request, Products $Product)
     {
-        //
+
+        dd($request);
+
+        return redirect()->back()->withSuccess('Product edit successfully!');
     }
 
     /**
@@ -79,8 +88,11 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Products $Product)
     {
-        //
+       
+        $Product->delete();
+
+        return redirect()->back()->withSuccess("Product " .$Product->name. " deleted successfully!");
     }
 }
