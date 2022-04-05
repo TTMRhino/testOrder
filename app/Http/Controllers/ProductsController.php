@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\MailSendJob;
 
 
 class ProductsController extends Controller
@@ -29,7 +30,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $a_data = ['Size'=>'','Color'=>''];
+       return view('create',['a_data' => $a_data]);
     }
 
     /**
@@ -40,7 +42,23 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
+        $data = [
+            'Size' => $request->Size,
+            'Color' => $request->Color
+        ];
+
+        $product = new Products();
+
+        $product->name = $request->name;
+        $product->article = $request->article;
+        $product->data = json_encode($data, JSON_PRETTY_PRINT);
+        $product->status = $request->status;
+        $product->save();
+
+        //send email notification       
+        MailSendJob::dispatch($product->name)->onQueue('Queue');
+
+        return redirect()->back()->withSuccess('New Product created successfully!');
     }
 
     /**
@@ -62,7 +80,7 @@ class ProductsController extends Controller
      */
     public function edit(Products $Product)
     {
-      
+        
         $a_data = json_decode( $Product->data);
         
        

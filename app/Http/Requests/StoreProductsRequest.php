@@ -32,7 +32,7 @@ class StoreProductsRequest extends FormRequest
             'name' => 'required|min:10|max:40',
             'article' =>[
                 'required',
-                'regex:/^[a-z0-9]+$/i',
+                'regex:/^[A-Za-z0-9]+$/i',
                 Rule::unique('products')->ignore($this->id),
 
             ] 

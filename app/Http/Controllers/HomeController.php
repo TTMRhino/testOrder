@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //write dunamic config varible userROLE in config product.role
+        //write dynamic config varible userROLE in config product.role
         Config::set('products.role', Auth::user()->roles->first()->name);
         
         $products = Products::available()->paginate(10);

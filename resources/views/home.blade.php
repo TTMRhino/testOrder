@@ -64,7 +64,7 @@
 
 </div>
 <div class="col-2 ">
-    <button type="button" class="btn btn-primary">Добавить</button>
+    <a href="{{ route('Products.create')}}"  type="button" class="btn btn-primary">Add</a>
 </div>
 
 
