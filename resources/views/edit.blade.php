@@ -47,7 +47,9 @@
                             @role('admin')
                               <input class="@error('name') is-invalid @enderror form-control" type="text" value="{{ $product->article }}"  name="article" id="article" placeholder="Enter Article" required>
                             @else
-                              <input disabled class="@error('name') is-invalid @enderror form-control" type="text" value="{{ $product->article }}"  name="article" id="article" placeholder="Enter Article" required>
+                              <input disabled class="@error('name') is-invalid @enderror form-control" type="text"  value="{{ $product->article }}" >
+                              <input  class="@error('name') is-invalid @enderror form-control" type="hidden" value="{{ $product->article }}"  name="article" id="article" placeholder="Enter Article" >
+                            
                             @endrole
 
                             @error('article')
