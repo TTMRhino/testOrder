@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationMail;
+use Illuminate\Support\Facades\Config;
 
 class MailSendJob implements ShouldQueue
 {
@@ -34,7 +35,7 @@ class MailSendJob implements ShouldQueue
     public function handle()
     {        
        
-        Mail::to('darkrino@mail.ru')->send(new NotificationMail($this->data));
+        Mail::to(Config::get('products.email'))->send(new NotificationMail($this->data));
         
     }
 }

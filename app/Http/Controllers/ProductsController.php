@@ -55,8 +55,8 @@ class ProductsController extends Controller
         $product->status = $request->status;
         $product->save();
 
-        //send email notification       
-        MailSendJob::dispatch($product->name)->onQueue('Queue');
+        //send email notification
+        MailSendJob::dispatch($product->name)->onQueue('Queue');       
 
         return redirect()->back()->withSuccess('New Product created successfully!');
     }
@@ -95,33 +95,7 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(StoreProductsRequest $request, Products $Product)
-    {
-        
-        /*$id = Products::where('id',$Product->id)->first();       
-
-       $validator =  Validator::make($request->all(), [
-            'name' => 'required|min:10|max:40',
-            'article' =>[
-                'required',
-                'regex:/^[a-z0-9]+$/i',
-                Rule::unique('products')->ignore($id->id),
-            ]
-        ]);
-
-
-        if($validator->fails()){
-            return response($validator->messages(), 200);
-        } else {
-
-            Helpers::storeServer($request);
-
-            return response()->json([
-                'message'=> ['Server Stored']
-            ]);
-        }*/
-
-
-
+    { 
         $data = [
             'Size' => $request->Size,
             'Color' => $request->Color
